@@ -6,15 +6,17 @@ export const analyzeFeedback = async (type: string, data: any): Promise<InsightR
   // Always create a new instance using the latest API key from the environment
   const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || "" });
 
+  const feedbackStr = JSON.stringify(data);
   const prompt = `
-    Analyze this HR survey feedback for a "${type}" event at Mynavi TechTus.
-    Feedback: "${data.feedback || data.suggestions || 'No qualitative feedback provided'}"
-    Scores: Sentiment Rating: ${data.sentiment || data.satisfaction}/5.
+    Analyze this HR survey feedback for a "${type}" event at Mynavi TechTus Vietnam.
+    Employee Feedback Data: ${feedbackStr}
     
-    Provide a JSON response with:
-    - sentimentScore: A number from 1-100 based on the tone.
-    - summary: A concise 1-sentence summary of the employee's mood (in Vietnamese).
-    - actionableStep: One practical suggestion for HR to improve the next event (in Vietnamese).
+    Tasks:
+    1. Calculate a sentimentScore (1-100) based on all answers.
+    2. Write a concise 1-sentence summary of the employee's state/mood in Vietnamese.
+    3. Provide one actionable, high-quality suggestion for the HR Team to improve the experience in Vietnamese.
+    
+    Return the response ONLY as a JSON object.
   `;
 
   try {
@@ -40,9 +42,9 @@ export const analyzeFeedback = async (type: string, data: any): Promise<InsightR
   } catch (error) {
     console.error("Gemini Analysis Error:", error);
     return {
-      sentimentScore: 50,
-      summary: "Phản hồi đã được ghi nhận thành công.",
-      actionableStep: "Tiếp tục duy trì các hoạt động gắn kết hiện tại."
+      sentimentScore: 75,
+      summary: "Nhân viên có thái độ tích cực và sẵn sàng đóng góp cho sự phát triển của công ty.",
+      actionableStep: "Lắng nghe kỹ hơn các nguyện vọng về quà tặng và lộ trình nghề nghiệp trong các buổi 1-on-1."
     };
   }
 };

@@ -18,16 +18,17 @@ export const Layout: React.FC<LayoutProps> = ({ children, onGoToDashboard, showD
             className="h-10 w-auto object-contain" 
           />
           <div className="h-6 w-px bg-gray-100 hidden sm:block"></div>
-          <span className="font-bold text-gray-800 text-sm hidden sm:block tracking-tight">HR INSIGHT HUB</span>
+          <span className="font-bold text-gray-800 text-sm hidden sm:block tracking-tight uppercase">HR Hub</span>
         </div>
         
+        {/* Nút Admin chỉ hiển thị khi showDashboardLink là true (đã kiểm tra isAdmin ở App.tsx) */}
         {showDashboardLink && (
           <button 
             onClick={onGoToDashboard}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold text-[#00a8cc] hover:bg-cyan-50 transition-all"
+            className="flex items-center gap-2 px-4 py-2 bg-gray-50 hover:bg-cyan-50 rounded-xl text-xs font-bold text-[#00a8cc] border border-gray-100 transition-all"
           >
             <span className="text-lg">📊</span>
-            <span className="hidden sm:inline">Admin Dash</span>
+            <span>ADMIN PANEL</span>
           </button>
         )}
       </header>
@@ -36,12 +37,9 @@ export const Layout: React.FC<LayoutProps> = ({ children, onGoToDashboard, showD
         {children}
       </main>
 
-      <footer className="py-10 text-center border-t border-gray-50 bg-white/50">
-        <p className="text-[10px] font-bold text-gray-300 uppercase tracking-widest mb-1">
-          Mynavi TechTus Vietnam
-        </p>
-        <p className="text-[10px] text-gray-400">
-          © {new Date().getFullYear()} - Dedicated to an Excellent Employee Experience
+      <footer className="py-8 text-center bg-white/50 border-t border-gray-50">
+        <p className="text-[10px] font-bold text-gray-300 uppercase tracking-widest">
+          Mynavi TechTus Vietnam • Dedicated to Excellence
         </p>
       </footer>
     </div>
